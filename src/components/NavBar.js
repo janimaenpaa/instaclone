@@ -14,7 +14,10 @@ const useStyles = makeStyles({
     borderBottomColor: "#dbdbdb",
     color: "black",
     padding: "0 30px",
-    boxShadow: "none"
+    boxShadow: "none",
+  },
+  appName: {
+    fontSize: "2.5rem"
   }
 });
 
@@ -23,7 +26,7 @@ const NavBar = () => {
   return (
     <AppBar position="sticky" className={classes.root}>
       <Toolbar>
-        <Typography variant="h2">Instaclone</Typography>
+        <Typography className={classes.appName} variant="h2">instaclone</Typography>
         <Button color="inherit" component={Link} to="/">
           Home
         </Button>

@@ -16,7 +16,9 @@ const App = () => {
   return (
     <div className="App">
       <Router>
+        <div className="nav-container">
         <NavBar />
+        </div>
         <div className="container">
           <Switch>
             <Route exact path="/" component={Home} />
