@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     fontSize: "2.5rem"
   },
   links: {
-    marginLeft: 20
+    marginLeft: "auto"
   }
 });
 
