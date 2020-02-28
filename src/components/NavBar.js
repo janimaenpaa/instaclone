@@ -13,11 +13,13 @@ const useStyles = makeStyles({
     borderBottom: "1px solid",
     borderBottomColor: "#dbdbdb",
     color: "black",
-    padding: "0 30px",
     boxShadow: "none",
   },
   appName: {
     fontSize: "2.5rem"
+  },
+  links: {
+    marginLeft: 20
   }
 });
 
@@ -26,16 +28,22 @@ const NavBar = () => {
   return (
     <AppBar position="sticky" className={classes.root}>
       <Toolbar>
-        <Typography className={classes.appName} variant="h2">instaclone</Typography>
-        <Button color="inherit" component={Link} to="/">
-          Home
-        </Button>
-        <Button color="inherit" component={Link} to="/login">
-          Login
-        </Button>
-        <Button color="inherit" component={Link} to="/signup">
-          Signup
-        </Button>
+        <Typography
+          className={classes.appName}
+          component={Link}
+          to="/"
+          variant="h2"
+        >
+          instaclone
+        </Typography>
+        <div className={classes.links}>
+          <Button color="inherit" component={Link} to="/login">
+            Login
+          </Button>
+          <Button color="inherit" component={Link} to="/signup">
+            Signup
+          </Button>
+        </div>
       </Toolbar>
     </AppBar>
   );

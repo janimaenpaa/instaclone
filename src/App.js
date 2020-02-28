@@ -1,16 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider"
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme"
 import "./App.css";
 import "typeface-roboto";
+
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import NavBar from "./components/NavBar";
 
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+
 
 const App = () => {
   return (

@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles({
   card: {
@@ -19,7 +18,11 @@ const useStyles = makeStyles({
     boxShadow: "none",
     textAlign: "center",
     justifyContent: "center",
-    width: "400px"
+    width: "500px"
+  },
+  header: {
+    marginTop: 10,
+    marginBottom: 10,
   },
   image: {
     width: "auto",
@@ -34,11 +37,12 @@ const useStyles = makeStyles({
   },
   content: {
     padding: 10
+  },
+  error: {
   }
 });
 
 const Login = props => {
-  const { errors, loading } = useState();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -50,7 +54,6 @@ const Login = props => {
 
   const handleChange = event => {
     setUser({ ...user, [event.target.name]: event.target.value });
-    console.log(user.email);
   };
 
   const handleSubmit = event => {
@@ -69,26 +72,35 @@ const Login = props => {
       )
       .then(response => {
         console.log(response.data);
+        localStorage.setItem("fbIdToken", `Bearer ${response.data.token}`);
         setUser({ ...user, loading: false });
         props.history.push("/");
       })
       .catch(err => {
-        setUser({ ...user, errors: err.data, loading: false });
+        setUser({ ...user, errors: err.response.data, loading: false });
       });
   };
 
   return (
     <Card className={classes.card}>
       <div className="content">
-        <Typography variant="h2">Login</Typography>
+        <Typography className={classes.header} variant="h2">
+          Login
+        </Typography>
         <form noValidate onSubmit={handleSubmit}>
+          {user.errors.general && (
+            <div>
+              <Alert severity="error">Email and password don't match</Alert>
+              <br />
+            </div>
+          )}
           <TextField
             id="email"
             name="email"
             type="email"
             label="Email"
-            helperText={errors.email}
-            error={errors.email ? true : false}
+            helperText={user.errors.email}
+            error={user.errors.email ? true : false}
             value={user.email}
             onChange={handleChange}
             fullWidth
@@ -99,12 +111,13 @@ const Login = props => {
             name="password"
             type="password"
             label="Password"
-            helperText={errors.password}
-            error={errors.password ? true : false}
+            helperText={user.errors.password}
+            error={user.errors.password ? true : false}
             value={user.password}
             onChange={handleChange}
             fullWidth
           />
+
           <Button
             className={classes.button}
             type="submit"

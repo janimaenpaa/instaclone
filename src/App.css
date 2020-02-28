@@ -16,6 +16,7 @@ body {
 
 .nav-container {
   margin: auto;
+  width: 100%
 }
 
 .nav-container svg {
